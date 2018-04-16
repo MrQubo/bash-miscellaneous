@@ -1,0 +1,10 @@
+#!/bin/bash
+
+trap exit SIGINT SIGTERM
+
+max=$1;
+shift;
+
+for ((i=0; i != max; i++)); do
+    "$@";
+done
