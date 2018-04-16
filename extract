@@ -1,4 +1,9 @@
 #!/bin/bash
+
+if [ $# -ne 1 ]; then
+    echo "Usage: extract FILENAME"
+fi
+
 if [ -f "$1" ] ; then
     case "$1" in
         *.tar.bz2)   tar xvjf "$1"     ;;
