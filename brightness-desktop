@@ -8,12 +8,12 @@ fi
 BMIN=0.2
 BMAX=3.0
 
-if [ "$2" != "--force" ] && ./float-gt $BMIN "$1"; then
+if [ "$2" != "--force" ] && float-gt $BMIN "$1"; then
     echo "Brightness less than 0.2, use --force"
     exit 1
 fi
 
-if [ "$2" != "--force" ] && ./float-gt "$1" $BMAX; then
+if [ "$2" != "--force" ] && float-gt "$1" $BMAX; then
     echo "Brightness greater than 3.0, use --force"
     exit 1
 fi
