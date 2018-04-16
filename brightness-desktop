@@ -1,8 +1,21 @@
 #!/bin/bash
 
-if [ $# -ne 1 ]; then
-	echo "Usage: brightness_desktop BRIGHTNESS"
+if [ $# -lt 1 ] || [ $# -gt 2 ]; then
+	echo "Usage: brightness_desktop BRIGHTNESS [--force]"
     exit 2
+fi
+
+BMIN=0.2
+BMAX=3.0
+
+if [ "$2" != "--force" ] && ./float-gt $BMIN "$1"; then
+    echo "Brightness less than 0.2, use --force"
+    exit 1
+fi
+
+if [ "$2" != "--force" ] && ./float-gt "$1" $BMAX; then
+    echo "Brightness greater than 3.0, use --force"
+    exit 1
 fi
 
 xrandr --output VGA-1 --brightness $1
