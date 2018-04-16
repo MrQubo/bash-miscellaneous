@@ -2,6 +2,7 @@
 
 if [ $# -lt 2 ]; then
     echo "Usage: N COMMAND..."
+    exit 2
 fi
 
 trap exit SIGINT SIGTERM
