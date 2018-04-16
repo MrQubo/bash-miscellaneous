@@ -4,6 +4,8 @@
 
 `extract`: Extracts archive in current working directory based on extension
 
+`float-gt`: Compares two floating point numbers
+
 `mirrorlist-update`: Updates pacman mirrorlist with all mirrors sorted by download rate
 
 `pass`: Reads silently one line from stdin and writes it to stdout
