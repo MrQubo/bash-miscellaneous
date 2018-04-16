@@ -1,0 +1,42 @@
+#!/bin/bash
+
+DIR="${1-.}"
+CUR_DIR="$(pwd)"
+
+echo -e "\e[1mFetching latest changes for all repositories...\e[0m\n"
+
+for f in $(find "$DIR" -name ".git" -type d 2>/dev/null); do
+    cd "$CUR_DIR"
+    f="`dirname "$f"`"
+    printf "\e[33m$f\e[0m   "
+
+    cd "$f" >/dev/null
+
+    git remote update >/dev/null 2>/dev/null
+    if [ $? -ne 0 ]; then
+        echo -e "\e[31m[Couldn't update remotes. Check your access rights.]\e[0m"
+        continue
+    fi
+    BRANCH="$(git rev-parse --abbrev-ref @ 2>/dev/null)"
+    LOCAL="$(git rev-parse @ 2>/dev/null)"
+    REMOTE="$(git rev-parse @{u} 2>/dev/null)"
+    ORIGIN="$(git rev-parse "origin/$BRANCH" 2>/dev/null)"
+    UPSTREAM="$(git rev-parse "upstream/$BRANCH" 2>/dev/null)"
+
+    if ! [[ "$REMOTE" =~ ^[a-z0-9]+$ ]]; then
+        printf "\e[32m[(no branch)]\e[0m"
+    elif ! [[ "$LOCAL" =~ ^[a-z0-9]+$ ]]; then
+        printf "\e[31m[Unknown Error]\e[0m"
+    elif [ "$LOCAL" != "$REMOTE" ]; then
+        printf "\e[31m[Update (remote)]\e[0m"
+    elif [[ "$ORIGIN" =~ ^[a-z0-9]+$ ]] && [ "$LOCAL" != "$ORIGIN" ]; then
+        printf "\e[31m[Update (origin)]\e[0m"
+    elif [[ "$UPSTREAM" =~ ^[a-z0-9]+$ ]] && ! git branch --contains "$UPSTREAM" >/dev/null 2>/dev/null; then
+        printf "\e[31m[Update (upstream)]\e[0m"
+    else
+        printf "\e[32m[Up-to-date]\e[0m"
+    fi
+    echo
+done
+
+echo -e "\n\e[32mComplete!\e[0m"
