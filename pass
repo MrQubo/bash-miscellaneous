@@ -1,3 +1,3 @@
 #!/bin/bash
 read -s password
-echo $password
+echo -n $password
