@@ -18,4 +18,14 @@ if [ "$2" != "--force" ] && float-gt "$1" $BMAX; then
     exit 1
 fi
 
-xrandr --output VGA-1 --brightness $1
+function first {
+  _RETURN="$1"
+}
+
+if [ -z $OUTPUT ]; then
+  OUTPUT="$(xrandr -q | grep " connected" | tail -n1)"
+  first $OUTPUT
+  OUTPUT="$_RETURN"
+fi
+
+xrandr --output "$OUTPUT" --brightness $1
