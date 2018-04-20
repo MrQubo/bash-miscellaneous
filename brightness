@@ -28,4 +28,9 @@ if [ -z $OUTPUT ]; then
   OUTPUT="$_RETURN"
 fi
 
+if [ -z $OUTPUT ]; then
+  echo "Couldn't find output"
+  exit 1
+fi
+
 xrandr --output "$OUTPUT" --brightness $1
