@@ -1,3 +1,5 @@
+`arch`: Prints machine architecture
+
 `brightness-desktop`: Sets brightness on desktop
 
 `check-repos`: Search recursively for git repos and checks if they need to be pulled or pushed
