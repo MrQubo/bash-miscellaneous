@@ -16,5 +16,5 @@
 
 `ptrace-enable`, `ptrace-disable`: Enables and disables ptrace (allows attaching gdb to existing processes).
 
-`repeat`: Repeats N times (if N isn't non-negative integer than repeats infinitely)
+`repeat`: Repeats N times (if N is negative integer than repeats infinitely, if N isn't an integer than does nothing)
 
