@@ -14,5 +14,7 @@
 
 `pass`: Reads silently one line from stdin and writes it to stdout
 
+`ptrace-enable`, `ptrace-disable`: Enables and disables ptrace (allows attaching gdb to existing processes).
+
 `repeat`: Repeats N times (if N isn't non-negative integer than repeats infinitely)
 
